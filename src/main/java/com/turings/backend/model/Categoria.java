@@ -1,6 +1,9 @@
 package com.turings.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity(name = "categorias")
 public class Categoria {
@@ -10,6 +13,10 @@ public class Categoria {
     private  int id_categoria;
 
     private String categoria;
+
+    @OneToMany(mappedBy = "categorias")
+    @JsonIgnore
+    private List<Categoria> categorias;
 
     public Categoria() {}
 
