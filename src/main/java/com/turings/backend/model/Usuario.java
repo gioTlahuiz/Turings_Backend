@@ -17,9 +17,11 @@ public class Usuario {
     private String direccion;
     private String numero_telefonico;
     private String contrasena;
+
     @OneToMany(mappedBy = "usuario")
     @JsonIgnore
     private List<Pedido> pedidos;
+
     public Usuario() {
     }
 
