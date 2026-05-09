@@ -93,4 +93,12 @@ public class DetallesPedidos {
     public void setEstado_pedido(String estado_pedido) {
         this.estado_pedido = estado_pedido;
     }
+
+    public Producto getProducto() {
+        return producto;
+    }
+
+    public void setProducto(Producto producto) {
+        this.producto = producto;
+    }
 }

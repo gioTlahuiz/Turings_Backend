@@ -24,6 +24,33 @@ public class Pedido {
     @JsonIgnore
     private List<DetallesPedidos> detallesPedidos;
 
+    @OneToOne(mappedBy = "pedido")
+    @JsonIgnore
+    private Review review;
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public List<DetallesPedidos> getDetallesPedidos() {
+        return detallesPedidos;
+    }
+
+    public void setDetallesPedidos(List<DetallesPedidos> detallesPedidos) {
+        this.detallesPedidos = detallesPedidos;
+    }
+
+    public Review getReview() {
+        return review;
+    }
+
+    public void setReview(Review review) {
+        this.review = review;
+    }
 
     public Pedido() {
     }
