@@ -20,7 +20,7 @@ public class Pedido {
     private String direccion;
     private String rastreador;
 
-    @OneToMany(mappedBy = "DetallesPedidos")
+    @OneToMany(mappedBy = "pedido")
     @JsonIgnore
     private List<DetallesPedidos> detallesPedidos;
 

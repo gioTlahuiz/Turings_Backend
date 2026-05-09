@@ -21,6 +21,10 @@ public class DetallesPedidos {
     private String imagen;
     private String estado_pedido;
 
+    @ManyToOne
+    @JoinColumn(name = "id_producto")
+    private Producto producto;
+
     public DetallesPedidos() {
     }
 

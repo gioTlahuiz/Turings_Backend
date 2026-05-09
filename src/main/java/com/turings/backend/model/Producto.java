@@ -1,6 +1,9 @@
 package com.turings.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity(name = "productos")
 public class Producto {
@@ -23,6 +26,9 @@ public class Producto {
     @JoinColumn(name = "id_categoria")
     private Categoria categoria;
 
+    @OneToMany(mappedBy = "producto")
+    @JsonIgnore
+    private List<DetallesPedidos> detallesPedidos;
 
 
 
