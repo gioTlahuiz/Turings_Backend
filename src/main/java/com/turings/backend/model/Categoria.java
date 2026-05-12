@@ -14,7 +14,7 @@ public class Categoria {
 
     private String categoria;
 
-    @OneToMany(mappedBy = "categorias")
+    @OneToMany(mappedBy = "categoria")
     @JsonIgnore
     private List<Categoria> categorias;
 
@@ -38,5 +38,13 @@ public class Categoria {
 
     public void setCategoria(String categoria) {
         this.categoria = categoria;
+    }
+
+    public List<Categoria> getCategorias() {
+        return categorias;
+    }
+
+    public void setCategorias(List<Categoria> categorias) {
+        this.categorias = categorias;
     }
 }

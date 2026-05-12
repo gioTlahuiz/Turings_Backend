@@ -1,8 +1,10 @@
 package com.turings.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity(name = "pedidos")
 public class Pedido {
@@ -18,6 +20,37 @@ public class Pedido {
     private String direccion;
     private String rastreador;
 
+    @OneToMany(mappedBy = "pedido")
+    @JsonIgnore
+    private List<DetallesPedidos> detallesPedidos;
+
+    @OneToOne(mappedBy = "pedido")
+    @JsonIgnore
+    private Review review;
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public List<DetallesPedidos> getDetallesPedidos() {
+        return detallesPedidos;
+    }
+
+    public void setDetallesPedidos(List<DetallesPedidos> detallesPedidos) {
+        this.detallesPedidos = detallesPedidos;
+    }
+
+    public Review getReview() {
+        return review;
+    }
+
+    public void setReview(Review review) {
+        this.review = review;
+    }
 
     public Pedido() {
     }

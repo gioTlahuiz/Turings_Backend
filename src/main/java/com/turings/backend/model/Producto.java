@@ -1,6 +1,9 @@
 package com.turings.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity(name = "productos")
 public class Producto {
@@ -8,14 +11,13 @@ public class Producto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_producto;
-    private int cantidad;
     private String color;
     private String descripcion;
-    private int descuento;
+    private double descuento;
     private boolean diseno;
     private String imagen;
     private String nombre;
-    private int precio;
+    private double precio;
     private int stock;
     private String talla;
     /* aqui van las llaves foraneas con las anotaciones*/
@@ -23,14 +25,16 @@ public class Producto {
     @JoinColumn(name = "id_categoria")
     private Categoria categoria;
 
+    @OneToMany(mappedBy = "producto")
+    @JsonIgnore
+    private List<DetallesPedidos> detallesPedidos;
 
 
 
-    public Producto(int id_Productos) {}
+    public Producto() {}
 
-    public Producto(int id_Productos, int cantidad, String color, String descripcion, int descuento, boolean diseno, String imagen, String nombre, int precio, int stock, String talla) {
+    public Producto(int id_Productos, String color, String descripcion, double descuento, boolean diseno, String imagen, String nombre, double precio, int stock, String talla) {
         this.id_producto = id_Productos;
-        this.cantidad = cantidad;
         this.color = color;
         this.descripcion = descripcion;
         this.descuento = descuento;
@@ -50,14 +54,6 @@ public class Producto {
         this.id_producto = id_Productos;
     }
 
-    public int getCantidad() {
-        return cantidad;
-    }
-
-    public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
-    }
-
     public String getColor() {
         return color;
     }
@@ -74,13 +70,11 @@ public class Producto {
         this.descripcion = descripcion;
     }
 
-    public int getDescuento() {
+    public double getDescuento() {
         return descuento;
     }
 
-    public void setDescuento(int descuento) {
-        this.descuento = descuento;
-    }
+    public void setDescuento(double descuento) {this.descuento = descuento;}
 
     public boolean isDiseno() {
         return diseno;
@@ -106,11 +100,11 @@ public class Producto {
         this.nombre = nombre;
     }
 
-    public int getPrecio() {
+    public double getPrecio() {
         return precio;
     }
 
-    public void setPrecio(int precio) {
+    public void setPrecio(double precio) {
         this.precio = precio;
     }
 
@@ -128,5 +122,29 @@ public class Producto {
 
     public void setTalla(String talla) {
         this.talla = talla;
+    }
+
+    public int getId_producto() {
+        return id_producto;
+    }
+
+    public void setId_producto(int id_producto) {
+        this.id_producto = id_producto;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
+
+    public List<DetallesPedidos> getDetallesPedidos() {
+        return detallesPedidos;
+    }
+
+    public void setDetallesPedidos(List<DetallesPedidos> detallesPedidos) {
+        this.detallesPedidos = detallesPedidos;
     }
 }

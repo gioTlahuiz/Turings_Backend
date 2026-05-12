@@ -17,9 +17,11 @@ public class Usuario {
     private String direccion;
     private String numero_telefonico;
     private String contrasena;
+
     @OneToMany(mappedBy = "usuario")
     @JsonIgnore
     private List<Pedido> pedidos;
+
     public Usuario() {
     }
 
@@ -86,5 +88,13 @@ public class Usuario {
 
     public void setContrasena(String contrasena) {
         this.contrasena = contrasena;
+    }
+
+    public List<Pedido> getPedidos() {
+        return pedidos;
+    }
+
+    public void setPedidos(List<Pedido> pedidos) {
+        this.pedidos = pedidos;
     }
 }
