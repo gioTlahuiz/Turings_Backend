@@ -2,9 +2,7 @@ package com.turings.backend.model;
 
 import jakarta.persistence.*;
 
-import java.awt.*;
-import java.util.Date;
-@Entity(name = "detalle_pedido")
+@Entity(name = "detalle_pedidos")
 public class DetallesPedidos {
 
     @Id
