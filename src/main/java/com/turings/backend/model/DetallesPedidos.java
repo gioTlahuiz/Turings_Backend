@@ -2,13 +2,13 @@ package com.turings.backend.model;
 
 import jakarta.persistence.*;
 
-@Entity(name = "detalle_pedidos")
+@Entity(name = "detalles_pedidos") // Verificar que coincida el nombre con el de la DB
 public class DetallesPedidos {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-    private int id_detalle;
+    private Long id_detalle;
     @ManyToOne
     @JoinColumn(name = "id_pedido")
     private Pedido pedido;
@@ -26,7 +26,7 @@ public class DetallesPedidos {
     public DetallesPedidos() {
     }
 
-    public DetallesPedidos(int id_detalle, Pedido pedido, int cantidad_producto, Double precio_total, String rastreador, String imagen, String estado_pedido) {
+    public DetallesPedidos(Long id_detalle, Pedido pedido, int cantidad_producto, Double precio_total, String rastreador, String imagen, String estado_pedido) {
         this.id_detalle = id_detalle;
         this.pedido = pedido;
         this.cantidad_producto = cantidad_producto;
@@ -36,11 +36,11 @@ public class DetallesPedidos {
         this.estado_pedido = estado_pedido;
     }
 
-    public int getId_detalle() {
+    public Long getId_detalle() {
         return id_detalle;
     }
 
-    public void setId_detalle(int id_detalle) {
+    public void setId_detalle(Long id_detalle) {
         this.id_detalle = id_detalle;
     }
 
