@@ -2,6 +2,7 @@ package com.turings.backend.service;
 
 import com.turings.backend.model.DetallesPedidos;
 import com.turings.backend.repository.DetallesPedidosRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
@@ -10,7 +11,7 @@ import java.util.Optional;
  * @version 1.0
  * @since 1.0
  */
-
+@Service
 public class DetallesPedidosService {
 
     final private DetallesPedidosRepository detallesPedidosRepository;
@@ -30,7 +31,7 @@ public class DetallesPedidosService {
     }
 
     //Metodo para guardar detalles de productos
-    public DetallesPedidos save(DetallesPedidos detallesPedidos) {
+    public DetallesPedidos saveDetails(DetallesPedidos detallesPedidos) {
         return detallesPedidosRepository.save(detallesPedidos);
     }
 

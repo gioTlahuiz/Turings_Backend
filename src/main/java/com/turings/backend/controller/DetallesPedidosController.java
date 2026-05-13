@@ -56,7 +56,7 @@ public class DetallesPedidosController {
      */
     @PostMapping("/nuevo-detalle-producto")
     public ResponseEntity<DetallesPedidos> createProduct(@RequestBody DetallesPedidos detallesPedidos) {
-        DetallesPedidos detallesPedidosDB = detallesPedidosService.save(detallesPedidos);
+        DetallesPedidos detallesPedidosDB = detallesPedidosService.saveDetails(detallesPedidos);
         return ResponseEntity.status(HttpStatus.CREATED).body(detallesPedidosDB);
     }
 
@@ -83,7 +83,7 @@ public class DetallesPedidosController {
             detallesPedidosDB.setProducto(detallesPedidos.getProducto());
 
             //Lo que hace es pasar el status de la petición
-            return ResponseEntity.status(HttpStatus.CREATED).body(detallesPedidosService.save(detallesPedidosDB));
+            return ResponseEntity.status(HttpStatus.CREATED).body(detallesPedidosService.saveDetails(detallesPedidosDB));
         }
         return ResponseEntity.notFound().build();
     }
