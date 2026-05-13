@@ -1,7 +1,12 @@
 package com.turings.backend.service;
 
 import com.turings.backend.model.DetallesPedidos;
+import com.turings.backend.model.Pedido;
+import com.turings.backend.model.Producto;
 import com.turings.backend.repository.DetallesPedidosRepository;
+import com.turings.backend.repository.PedidoRepository;
+import com.turings.backend.repository.ProductoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,11 +19,14 @@ import java.util.Optional;
 @Service
 public class DetallesPedidosService {
 
-    final private DetallesPedidosRepository detallesPedidosRepository;
+//    final private DetallesPedidosRepository detallesPedidosRepository;
 
-    public DetallesPedidosService(DetallesPedidosRepository detallesPedidosRepository) {
-        this.detallesPedidosRepository = detallesPedidosRepository;
-    }
+    @Autowired
+    private DetallesPedidosRepository detallesPedidosRepository;
+    @Autowired
+    private PedidoRepository pedidoRepository;
+    @Autowired
+    private ProductoRepository productoRepository;
 
     //Metodo para encontrar todo los detalles de producto
     public List<DetallesPedidos> findAll() {
@@ -32,6 +40,13 @@ public class DetallesPedidosService {
 
     //Metodo para guardar detalles de productos
     public DetallesPedidos saveDetails(DetallesPedidos detallesPedidos) {
+        // getReferenceById obtiene el "proxy" del objeto directamente
+        Pedido pedidoExistente = pedidoRepository.getReferenceById((long) detallesPedidos.getProducto().getId_producto());   //
+        Producto productoExistente = productoRepository.getReferenceById((long) detallesPedidos.getProducto().getId_producto());
+
+        detallesPedidos.setPedido(pedidoExistente);
+        detallesPedidos.setProducto(productoExistente);
+
         return detallesPedidosRepository.save(detallesPedidos);
     }
 
