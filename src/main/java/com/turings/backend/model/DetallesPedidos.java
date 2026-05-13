@@ -1,7 +1,8 @@
 package com.turings.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity(name = "detalles_pedidos") // Verificar que coincida el nombre con el de la DB
 public class DetallesPedidos {
 
@@ -20,7 +21,8 @@ public class DetallesPedidos {
     private String estado_pedido;
 
     @ManyToOne
-    @JoinColumn(name = "id_producto")
+//    @JoinColumn(name = "id_producto")
+    @JoinColumn(name = "productos_id_producto") // Ahora coincide con tu DB
     private Producto producto;
 
     public DetallesPedidos() {
