@@ -21,9 +21,6 @@ public class Categoria {
         this.categoria = categoria;
     }
 
-    public Categoria(int id) {
-    }
-
     public Long getId_categoria() {
         return id_categoria;
     }
