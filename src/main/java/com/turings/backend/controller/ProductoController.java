@@ -11,6 +11,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("api/v1/productos")
+@CrossOrigin(origins="*")
 public class ProductoController {
 
     private final ProductoService productoService;
