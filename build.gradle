@@ -23,6 +23,17 @@ dependencies {
 	runtimeOnly 'com.mysql:mysql-connector-j'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+
+	// Spring Security permite proteger los endpoints de la API.
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+
+	// Dependencias de JWT.
+	// jjwt-api contiene las clases principales para crear y leer tokens.
+	implementation 'io.jsonwebtoken:jjwt-api:0.12.6'
+	// jjwt-impl y jjwt-jackson se usan en tiempo de ejecución para firmar y serializar el token.
+	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.12.6'
+	runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.12.6'
 }
 
 tasks.named('test') {

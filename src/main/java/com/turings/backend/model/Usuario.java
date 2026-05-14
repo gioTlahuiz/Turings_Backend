@@ -13,14 +13,22 @@ public class Usuario {
     private int id_usuario;
     private String nombre;
     private String apellidos;
-    private String correo_electronico;
+
+    @Column(name = "correo_electronico")
+    private String correoElectronico;
+
     private String direccion;
     private String numero_telefonico;
     private String contrasena;
 
+
+
+
     @OneToMany(mappedBy = "usuario")
     @JsonIgnore
     private List<Pedido> pedidos;
+
+
 
     public Usuario() {
     }
@@ -28,7 +36,7 @@ public class Usuario {
     public Usuario(String nombre, String apellidos, String correo_electronico, String direccion, String numero_telefonico, String contrasena) {
         this.nombre = nombre;
         this.apellidos = apellidos;
-        this.correo_electronico = correo_electronico;
+        this.correoElectronico = correo_electronico;
         this.direccion = direccion;
         this.numero_telefonico = numero_telefonico;
         this.contrasena = contrasena;
@@ -59,11 +67,11 @@ public class Usuario {
     }
 
     public String getCorreo_electronico() {
-        return correo_electronico;
+        return correoElectronico;
     }
 
-    public void setCorreo_electronico(String correo_electronico) {
-        this.correo_electronico = correo_electronico;
+    public void setCorreo_electronico(String correoElectronico) {
+        this.correoElectronico = correoElectronico;
     }
 
     public String getDireccion() {
@@ -97,4 +105,7 @@ public class Usuario {
     public void setPedidos(List<Pedido> pedidos) {
         this.pedidos = pedidos;
     }
+
+
+
 }
