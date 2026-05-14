@@ -21,6 +21,10 @@ public class UsuarioService {
         return usuarioRepository.findAll();
     }
 
+    public Usuario getUsuarioById(Long id){
+        return usuarioRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("El usuario con el id["+ id +"] no existe"));
+    }
+
     public Usuario guardarUsuario(Usuario usuario){
         return usuarioRepository.save(usuario);
     }

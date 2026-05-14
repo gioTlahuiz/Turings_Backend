@@ -25,6 +25,11 @@ public class UsuarioController {
         return usuarioService.getAllUsuarios();
     }
 
+    @GetMapping("/{id}")
+    public Usuario getUsuario(@PathVariable("id")Long id){
+        return usuarioService.getUsuarioById(id);
+    }
+
     @PostMapping
     public Usuario guardarUsuario (@RequestBody Usuario usuario){
         return usuarioService.guardarUsuario(usuario);
