@@ -27,7 +27,7 @@ public class PedidoController {
     }
 
     // Obtener pedido por ID
-    @GetMapping("/{id_pedido}")
+    @GetMapping("/{id}")
     public Pedido getPedidoById(@PathVariable("id_pedido") int id) {
         return pedidoService.findById(id);
     }
@@ -39,7 +39,7 @@ public class PedidoController {
     }
 
     // Actualizar pedido existente
-    @PutMapping("/{id_pedido}")
+    @PutMapping("/{id}")
     public Pedido updatePedido(@PathVariable("id_pedido") int id, @RequestBody Pedido pedido) {
         // Aseguramos que el objeto tenga el ID correcto antes de mandarlo al service
         pedido.setId_pedido(id);
@@ -47,7 +47,7 @@ public class PedidoController {
     }
 
     // Eliminar pedido
-    @DeleteMapping("/{id_pedido}")
+    @DeleteMapping("/{id}")
     public void deletePedido(@PathVariable("id_pedido") int id) {
         pedidoService.delete(id);
     }
