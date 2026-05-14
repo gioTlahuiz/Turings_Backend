@@ -15,7 +15,8 @@ import java.util.Optional;
  */
 
 @RestController
-@RequestMapping("/detalles-pedidos")
+@RequestMapping("/api/v1/detalles-pedidos")
+@CrossOrigin(origins = "*") //Permite resolver los conflictos de los CORS
 public class DetallesPedidosController {
 
     final private DetallesPedidosService detallesPedidosService;
@@ -54,7 +55,7 @@ public class DetallesPedidosController {
      * @param detallesPedidos Nuevo detalle de producto a crear
      * @return Regresa un mensaje 200, ya que el detalle del producto se creó en la tabla
      */
-    @PostMapping("/nuevo-detalle-producto")
+    @PostMapping("/")
     public ResponseEntity<DetallesPedidos> createProduct(@RequestBody DetallesPedidos detallesPedidos) {
         DetallesPedidos detallesPedidosDB = detallesPedidosService.saveDetails(detallesPedidos);
         return ResponseEntity.status(HttpStatus.CREATED).body(detallesPedidosDB);
@@ -66,7 +67,7 @@ public class DetallesPedidosController {
      * @param id Con el ID se verifica que exista el detalle del producto que se busca editar
      * @return En caso que exista el detalle del producto con id se guarda, en caso que no generara un mensaje 404
      */
-    @PutMapping("/editar/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<DetallesPedidos> update(@RequestBody DetallesPedidos detallesPedidos, @PathVariable Long id) {
         //Primero buscamos en base de datos que exista el objeto
         Optional<DetallesPedidos> optionalDetallesPedidos = detallesPedidosService.findById(id);
@@ -93,7 +94,7 @@ public class DetallesPedidosController {
      * @param id Para verificar que exista el detalle del producto por ID
      * @return Regresa un mensaje 200 si se elimino, sino un 404
      */
-    @DeleteMapping("/eliminar/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<DetallesPedidos> delete(@PathVariable Long id) {
         Optional<DetallesPedidos> optionalDetallesPedidos = detallesPedidosService.deleteById(id);
         if (optionalDetallesPedidos.isPresent()) {
