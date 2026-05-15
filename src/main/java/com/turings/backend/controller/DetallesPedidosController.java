@@ -30,7 +30,7 @@ public class DetallesPedidosController {
      * ResponseEntity -> Es el JSON
      * @return una lista (arreglo) con los objetos productos en estructura JSON
      */
-    @GetMapping()
+    @GetMapping
     public ResponseEntity<List<DetallesPedidos>> list() {
         return ResponseEntity.ok(detallesPedidosService.findAll());
     }
@@ -55,7 +55,7 @@ public class DetallesPedidosController {
      * @param detallesPedidos Nuevo detalle de producto a crear
      * @return Regresa un mensaje 200, ya que el detalle del producto se creó en la tabla
      */
-    @PostMapping("/")
+    @PostMapping
     public ResponseEntity<DetallesPedidos> createProduct(@RequestBody DetallesPedidos detallesPedidos) {
         DetallesPedidos detallesPedidosDB = detallesPedidosService.saveDetails(detallesPedidos);
         return ResponseEntity.status(HttpStatus.CREATED).body(detallesPedidosDB);
