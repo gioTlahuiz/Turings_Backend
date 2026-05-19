@@ -21,9 +21,6 @@ public class Usuario {
     private String numero_telefonico;
     private String contrasena;
 
-
-
-
     @OneToMany(mappedBy = "usuario")
     @JsonIgnore
     private List<Pedido> pedidos;
@@ -33,10 +30,10 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Usuario(String nombre, String apellidos, String correo_electronico, String direccion, String numero_telefonico, String contrasena) {
+    public Usuario(String nombre, String apellidos, String correoElectronico, String direccion, String numero_telefonico, String contrasena) {
         this.nombre = nombre;
         this.apellidos = apellidos;
-        this.correoElectronico = correo_electronico;
+        this.correoElectronico = correoElectronico;
         this.direccion = direccion;
         this.numero_telefonico = numero_telefonico;
         this.contrasena = contrasena;
@@ -70,8 +67,8 @@ public class Usuario {
         return correoElectronico;
     }
 
-    public void setCorreo_electronico(String correoElectronico) {
-        this.correoElectronico = correoElectronico;
+    public void setCorreo_electronico(String correo_electronico) {
+        this.correoElectronico = correo_electronico;
     }
 
     public String getDireccion() {

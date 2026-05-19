@@ -1,6 +1,7 @@
 package com.turings.backend.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.turings.backend.model.Usuario;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -10,13 +11,9 @@ public class Categoria {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private  int id_categoria;
+    private Long id_categoria;
 
     private String categoria;
-
-    @OneToMany(mappedBy = "categoria")
-    @JsonIgnore
-    private List<Categoria> categorias;
 
     public Categoria() {}
 
@@ -24,11 +21,11 @@ public class Categoria {
         this.categoria = categoria;
     }
 
-    public int getId_categoria() {
+    public Long getId_categoria() {
         return id_categoria;
     }
 
-    public void setId_categoria(int id_categoria) {
+    public void setId_categoria(Long id_categoria) {
         this.id_categoria = id_categoria;
     }
 
@@ -39,12 +36,5 @@ public class Categoria {
     public void setCategoria(String categoria) {
         this.categoria = categoria;
     }
-
-    public List<Categoria> getCategorias() {
-        return categorias;
-    }
-
-    public void setCategorias(List<Categoria> categorias) {
-        this.categorias = categorias;
-    }
+    
 }

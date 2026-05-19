@@ -1,4 +1,69 @@
 package com.turings.backend.controller;
 
+import com.turings.backend.DTO.LoginRequest;
+import com.turings.backend.model.Usuario;
+import com.turings.backend.service.UsuarioService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
+
+
+import java.util.List;
+
+
+@RestController
+@RequestMapping("api/v1/usuario")
+@CrossOrigin(origins = "*")
+
 public class UsuarioController {
+    private final UsuarioService usuarioService;
+
+    @Autowired
+    public UsuarioController (UsuarioService usuarioService) {
+        this.usuarioService = usuarioService;
+    }
+
+    @GetMapping
+    public List<Usuario> getAllUsuarios(){
+        return usuarioService.getAllUsuarios();
+    }
+
+    @GetMapping("/{id}")
+    public Usuario getUsuario(@PathVariable("id")Long id){
+        return usuarioService.getUsuarioById(id);
+    }
+
+    @PostMapping("/login")
+    public Usuario login(@RequestBody LoginRequest loginDTO){
+        Usuario user = usuarioService.login(loginDTO.getUsername());
+
+        if(user.getContrasena().equals(loginDTO.getPassword())){
+            return user;
+        }else{
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST,
+                    "El usuario o contraseña son incorrectos"
+            );
+        }
+
+    }
+
+    @PostMapping
+    public Usuario guardarUsuario (@RequestBody Usuario usuario){
+        return usuarioService.guardarUsuario(usuario);
+    }
+
+    @PutMapping("/{id}")
+    public Usuario actualizarUsuario (@PathVariable Long id, @RequestBody Usuario usuario) {
+        return usuarioService.actualizarUsuario(id, usuario);
+    }
+
+    @DeleteMapping("/{id}")
+    public void borrarUsuario (@PathVariable Long id) {
+        usuarioService.borrarUsuario(id);
+    }
 }
