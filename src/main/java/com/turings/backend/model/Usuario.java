@@ -13,6 +13,7 @@ public class Usuario {
     private int id_usuario;
     private String nombre;
     private String apellidos;
+    private String rol;
 
     @Column(name = "correo_electronico")
     private String correoElectronico;
@@ -25,7 +26,24 @@ public class Usuario {
     @JsonIgnore
     private List<Pedido> pedidos;
 
+    public String getRol() {
+        return rol;
+    }
 
+    public void setRol(String rol) {
+        this.rol = rol;
+    }
+
+    public Usuario(int id_usuario, String nombre, String apellidos, String rol, String correoElectronico, String direccion, String numero_telefonico, String contrasena) {
+        this.id_usuario = id_usuario;
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.rol = rol;
+        this.correoElectronico = correoElectronico;
+        this.direccion = direccion;
+        this.numero_telefonico = numero_telefonico;
+        this.contrasena = contrasena;
+    }
 
     public Usuario() {
     }

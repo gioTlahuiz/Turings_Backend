@@ -1,6 +1,8 @@
 package com.turings.backend.config;
 
 import com.turings.backend.security.JwtAuthenticationFilter;
+import com.turings.backend.service.UserAuthService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -23,6 +25,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+    @Autowired
+    private UserAuthService userAuthService; // Tu servicio de base de datos
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http,
@@ -44,33 +48,50 @@ public class SecurityConfig {
                  * Todos los demás endpoints requieren autenticación.
                  */
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(HttpMethod.POST,"/auth/login").permitAll()
-                        .requestMatchers(HttpMethod.POST,"/auth/registro").permitAll()
-                        .requestMatchers(HttpMethod.GET,"/categoria").permitAll()
-                        .requestMatchers(HttpMethod.GET,"/producto").permitAll()
-                        .requestMatchers(HttpMethod.GET,"/review").permitAll()
+                        /* PUBLICO  HMTL */
 
-                        .requestMatchers(HttpMethod.POST,"/categoria").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.DELETE,"/categoria").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.PUT,"/categoria").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET,"/").permitAll()
+                        .requestMatchers("/favicon.ico").permitAll()
+                        .requestMatchers(HttpMethod.GET,"/CSS/**").permitAll()
+                        .requestMatchers(HttpMethod.GET,"/FONT/**").permitAll()
+                        .requestMatchers(HttpMethod.GET,"/JS/**").permitAll()
+                        .requestMatchers(HttpMethod.GET,"/Pictures/**").permitAll()
+                        .requestMatchers(HttpMethod.GET,"/*.html").permitAll()
 
-                        .requestMatchers(HttpMethod.DELETE,"/detalle").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.PUT,"/detalle").hasRole("ADMIN")
+                        /* PUBLICO APIS */
+                        .requestMatchers(HttpMethod.POST,"/api/v1/auth/login").permitAll()
+                        .requestMatchers(HttpMethod.POST,"/api/v1/auth/registro").permitAll()
+                        .requestMatchers(HttpMethod.GET,"/api/v1/categorias").permitAll()
+                        .requestMatchers(HttpMethod.GET,"/api/v1/productos").permitAll()
+                        .requestMatchers(HttpMethod.GET,"/api/v1/reviews").permitAll()
+                        .requestMatchers(HttpMethod.GET,"/api/v1/detalles-pedidos").permitAll()
 
-                        .requestMatchers(HttpMethod.DELETE,"/pedido").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.PUT,"/pedido").hasRole("ADMIN")
+                        /*ADMIN HTML */
 
-                        .requestMatchers(HttpMethod.POST,"/producto").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.DELETE,"/producto").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.PUT,"/producto").hasRole("ADMIN")
+                        /*ADMIN API*/
+                        .requestMatchers(HttpMethod.POST,"/api/v1/categorias").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE,"/api/v1/categorias").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT,"/api/v1/categorias").hasRole("ADMIN")
 
-                        .requestMatchers(HttpMethod.DELETE,"/review").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.PUT,"/review").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE,"/api/v1/detalles-pedidos").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT,"/api/v1/detalles-pedidos").hasRole("ADMIN")
 
-                        .requestMatchers(HttpMethod.POST,"/users").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.DELETE,"/users").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.PUT,"/users").hasRole("ADMIN")
-                        .anyRequest().authenticated()
+                        .requestMatchers(HttpMethod.DELETE,"/api/v1/pedidos").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT,"/api/v1/pedidos").hasRole("ADMIN")
+
+                        .requestMatchers(HttpMethod.POST,"/api/v1/productos").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE,"/api/v1/productos").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT,"/api/v1/productos").hasRole("ADMIN")
+
+                        .requestMatchers(HttpMethod.DELETE,"/api/v1/reviews").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT,"/api/v1/reviews").hasRole("ADMIN")
+
+                        .requestMatchers(HttpMethod.POST,"/api/v1/usuario").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE,"/api/v1/usuario").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT,"/api/v1/usuario").hasRole("ADMIN")
+
+
+                        .anyRequest().hasAnyRole("ADMIN","USER")
                 )
 
                 /*
@@ -105,7 +126,7 @@ public class SecurityConfig {
          * En esta demo salen de memoria.
          * En un proyecto real podrían salir de MySQL usando UserRepository.
          */
-        authProvider.setUserDetailsService(userDetailsService());
+        authProvider.setUserDetailsService(userAuthService);
 
         /*
          * PasswordEncoder indica cómo comparar contraseñas.
@@ -116,27 +137,6 @@ public class SecurityConfig {
         return authProvider;
     }
 
-    @Bean
-    public UserDetailsService userDetailsService() {
-        /*
-         * Usuario de demo para clase.
-         *
-         * Credenciales para Postman/Insomnia:
-         * username: admin
-         * password: admin123
-         *
-         * Importante:
-         * passwordEncoder().encode("admin123") genera un hash BCrypt.
-         * Eso significa que Spring NO guarda "admin123" como texto plano.
-         */
-        UserDetails admin = User.builder()
-                .username("admin")
-                .password(passwordEncoder().encode("admin123"))
-                .roles("ADMIN")
-                .build();
-
-        return new InMemoryUserDetailsManager(admin);
-    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {

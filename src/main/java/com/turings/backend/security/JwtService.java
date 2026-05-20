@@ -4,12 +4,14 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
@@ -57,6 +59,13 @@ public class JwtService {
         Date now = new Date(System.currentTimeMillis());
         Date expirationDate = new Date(System.currentTimeMillis() + EXPIRATION_TIME_MS);
 
+        List<String> roles = userDetails.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .toList();
+
+        extraClaims.put("roles", roles);
+        System.out.println(extraClaims);
+
         return Jwts.builder()
                 // Claims extra: información adicional dentro del token.
                 .claims(extraClaims)
@@ -64,6 +73,7 @@ public class JwtService {
                 .subject(userDetails.getUsername())
                 // Fecha de creación.
                 .issuedAt(now)
+
                 // Fecha de vencimiento. Después de esta fecha, el token ya no sirve.
                 .expiration(expirationDate)
                 // Firma: garantiza que el token no fue alterado.

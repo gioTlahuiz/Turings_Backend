@@ -3,6 +3,7 @@ package com.turings.backend.service;
 import com.turings.backend.model.Usuario;
 import com.turings.backend.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -16,13 +17,20 @@ public class UserAuthService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        System.out.println("MIRA WE UN SERVICIO");
         Usuario usuario = usuarioRepository.findByCorreoElectronico(username)
                 .orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado"));
+        if (usuario.getRol().isEmpty()){
+            usuario.setRol("USER");
+        }
+        System.out.println(usuario.getRol());
         return User.builder()
+                .authorities(usuario.getRol())
                 .username(usuario.getCorreo_electronico())
                 .password(usuario.getContrasena())
-                .roles("USER")
+                .roles(usuario.getRol())
                 .build();
     }
+
 
 }
