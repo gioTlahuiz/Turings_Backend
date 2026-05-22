@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -32,6 +33,11 @@ public class AuthController {
         this.jwtService = jwtService;
     }
 
+    @GetMapping
+    public Usuario loginActual(@AuthenticationPrincipal UserDetails userDetails){
+        Usuario usuario = usuarioRepository.findByCorreoElectronico(userDetails.getUsername()).get();
+        return usuario;
+    }
 
     @PostMapping("/login")
     public AuthResponse login(@RequestBody LoginRequest loginRequest) {

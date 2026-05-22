@@ -64,7 +64,6 @@ public class JwtService {
                 .toList();
 
         extraClaims.put("roles", roles);
-        System.out.println(extraClaims);
 
         return Jwts.builder()
                 // Claims extra: información adicional dentro del token.

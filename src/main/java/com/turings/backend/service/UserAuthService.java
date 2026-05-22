@@ -17,13 +17,11 @@ public class UserAuthService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        System.out.println("MIRA WE UN SERVICIO");
         Usuario usuario = usuarioRepository.findByCorreoElectronico(username)
                 .orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado"));
         if (usuario.getRol().isEmpty()){
             usuario.setRol("USER");
         }
-        System.out.println(usuario.getRol());
         return User.builder()
                 .authorities(usuario.getRol())
                 .username(usuario.getCorreo_electronico())
