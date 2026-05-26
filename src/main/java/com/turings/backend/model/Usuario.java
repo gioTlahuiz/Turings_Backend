@@ -6,15 +6,16 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity(name = "usuario")
-public class Usuario {
+public class Usuario  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_usuario;
     private String nombre;
     private String apellidos;
+    private String rol;
 
-    @Column(name= "correo_electronico")
+    @Column(name = "correo_electronico")
     private String correoElectronico;
 
     private String direccion;
@@ -24,6 +25,25 @@ public class Usuario {
     @OneToMany(mappedBy = "usuario")
     @JsonIgnore
     private List<Pedido> pedidos;
+
+    public String getRol() {
+        return rol;
+    }
+
+    public void setRol(String rol) {
+        this.rol = rol;
+    }
+
+    public Usuario(int id_usuario, String nombre, String apellidos, String rol, String correoElectronico, String direccion, String numero_telefonico, String contrasena) {
+        this.id_usuario = id_usuario;
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.rol = rol;
+        this.correoElectronico = correoElectronico;
+        this.direccion = direccion;
+        this.numero_telefonico = numero_telefonico;
+        this.contrasena = contrasena;
+    }
 
     public Usuario() {
     }
@@ -100,5 +120,7 @@ public class Usuario {
     public void setPedidos(List<Pedido> pedidos) {
         this.pedidos = pedidos;
     }
+
+
 
 }

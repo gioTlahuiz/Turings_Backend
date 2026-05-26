@@ -2,6 +2,10 @@ package com.turings.backend.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+
+import java.awt.*;
+import java.util.Date;
+
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity(name = "detalles_pedidos") // Verificar que coincida el nombre con el de la DB
 public class DetallesPedidos {

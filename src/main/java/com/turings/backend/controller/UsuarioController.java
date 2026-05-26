@@ -37,20 +37,6 @@ public class UsuarioController {
         return usuarioService.getUsuarioById(id);
     }
 
-    @PostMapping("/login")
-    public Usuario login(@RequestBody LoginRequest loginDTO){
-        Usuario user = usuarioService.login(loginDTO.getUsername());
-
-        if(user.getContrasena().equals(loginDTO.getPassword())){
-            return user;
-        }else{
-            throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST,
-                    "El usuario o contraseña son incorrectos"
-            );
-        }
-
-    }
 
     @PostMapping
     public Usuario guardarUsuario (@RequestBody Usuario usuario){

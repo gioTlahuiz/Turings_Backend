@@ -6,6 +6,22 @@ public class AuthResponse {
     private String token;
     private String tokenType;
     private Long expiresInMs;
+    private String roles;
+
+    public AuthResponse(String token, String tokenType, Long expiresInMs, String roles) {
+        this.token = token;
+        this.tokenType = tokenType;
+        this.expiresInMs = expiresInMs;
+        this.roles = roles;
+    }
+
+    public String getRoles() {
+        return roles;
+    }
+
+    public void setRoles(String rol) {
+        this.roles = rol;
+    }
 
     public AuthResponse() {
     }

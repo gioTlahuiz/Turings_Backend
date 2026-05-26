@@ -7,6 +7,8 @@ import com.turings.backend.repository.DetallesPedidosRepository;
 import com.turings.backend.repository.PedidoRepository;
 import com.turings.backend.repository.ProductoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -58,5 +60,14 @@ public class DetallesPedidosService {
             return detallesPedidosOptional;
         }
         return Optional.empty();
+    }
+
+    public List<DetallesPedidos> getHistorial(Long id){
+        return detallesPedidosRepository.getHistorial(id);
+    }
+
+    public List<Producto> getLastPedidos(){
+        Pageable page = PageRequest.of(0,5);
+        return detallesPedidosRepository.getLast(page).toList();
     }
 }

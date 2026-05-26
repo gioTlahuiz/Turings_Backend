@@ -54,7 +54,7 @@ public class UsuarioService {
     }
 
     public Usuario login(String correo){
-        Usuario user = usuarioRepository.findByCorreoElectronico(correo);
+        Usuario user = usuarioRepository.findByCorreoElectronico(correo).get();
         return user;
     }
 }

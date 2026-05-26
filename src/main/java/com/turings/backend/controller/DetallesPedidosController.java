@@ -1,9 +1,15 @@
 package com.turings.backend.controller;
 
 import com.turings.backend.model.DetallesPedidos;
+import com.turings.backend.model.Producto;
+import com.turings.backend.model.Usuario;
+import com.turings.backend.repository.UsuarioRepository;
 import com.turings.backend.service.DetallesPedidosService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,6 +25,8 @@ import java.util.Optional;
 @CrossOrigin(origins = "*") //Permite resolver los conflictos de los CORS
 public class DetallesPedidosController {
 
+    @Autowired
+    private UsuarioRepository usuarioRepository;
     final private DetallesPedidosService detallesPedidosService;
 
     public DetallesPedidosController(DetallesPedidosService detallesPedidosService) {
@@ -102,6 +110,19 @@ public class DetallesPedidosController {
             return ResponseEntity.status(HttpStatus.OK).body(detallesPedidosDelete);
         }
         return ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("/historial")
+    public List<DetallesPedidos> getHistorial(@AuthenticationPrincipal UserDetails userDetails){
+        Usuario usuario = usuarioRepository.findByCorreoElectronico(userDetails.getUsername())
+                .orElseThrow();
+        return detallesPedidosService.getHistorial((long) usuario.getId_usuario());
+
+    }
+
+    @GetMapping("/last")
+    public List<Producto> getLast(){
+        return detallesPedidosService.getLastPedidos();
     }
 
 }
