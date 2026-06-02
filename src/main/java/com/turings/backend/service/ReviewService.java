@@ -23,6 +23,14 @@ public class ReviewService {
     }
 
 
+
+    public List<Review> getAllUserReviews(int id) {
+        return reviewRepository.findByUserId((long) id);
+    }
+
+
+
+
     public Review saveReview(Review review) {
         return reviewRepository.save(review);
     }
@@ -43,6 +51,7 @@ public class ReviewService {
             return reviewRepository.save(review);
         }).orElse(null);
     }
+
 
 
 

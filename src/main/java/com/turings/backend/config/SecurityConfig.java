@@ -21,6 +21,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+
+import java.util.List;
 
 @Configuration
 @EnableWebSecurity
@@ -64,6 +67,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET,"/api/v1/categorias").permitAll()
                         .requestMatchers(HttpMethod.GET,"/api/v1/productos").permitAll()
                         .requestMatchers(HttpMethod.GET,"/api/v1/productos/*").permitAll()
+                        .requestMatchers(HttpMethod.GET,"/api/v1/productos/img/*").permitAll()
                         .requestMatchers(HttpMethod.GET,"/api/v1/reviews").permitAll()
                         .requestMatchers(HttpMethod.GET,"/api/v1/detalles-pedidos").permitAll()
                         .requestMatchers(HttpMethod.GET,"/api/v1/detalles-pedidos/last").permitAll()
@@ -106,6 +110,15 @@ public class SecurityConfig {
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
 
+                .cors(cors -> cors.configurationSource(request -> {
+                    CorsConfiguration config = new CorsConfiguration();
+                    config.setAllowedOrigins(List.of("*"));
+                    config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+                    config.setAllowedHeaders(List.of("*"));
+                    config.setAllowCredentials(false);
+                    return config;
+                }))
+                // 2. Tu configuración habitual de CSRF y rutas
                 /*
                  * AuthenticationProvider indica cómo se validan usuario y contraseña.
                  */
