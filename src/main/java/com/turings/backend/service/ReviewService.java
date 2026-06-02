@@ -3,7 +3,11 @@ package com.turings.backend.service;
 import com.turings.backend.model.Review;
 import com.turings.backend.repository.ReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 @Service
@@ -14,8 +18,17 @@ public class ReviewService {
 
 
     public List<Review> getAllReviews() {
-        return reviewRepository.findAll();
+        Pageable page = PageRequest.of(0, 6, Sort.by("idReviews").descending());
+        return reviewRepository.findAll(page).toList();
     }
+
+
+
+    public List<Review> getAllUserReviews(int id) {
+        return reviewRepository.findByUserId((long) id);
+    }
+
+
 
 
     public Review saveReview(Review review) {
@@ -38,6 +51,7 @@ public class ReviewService {
             return reviewRepository.save(review);
         }).orElse(null);
     }
+
 
 
 
