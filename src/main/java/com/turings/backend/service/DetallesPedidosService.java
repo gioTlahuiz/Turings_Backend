@@ -43,7 +43,7 @@ public class DetallesPedidosService {
     //Metodo para guardar detalles de productos
     public DetallesPedidos saveDetails(DetallesPedidos detallesPedidos) {
         // getReferenceById obtiene el "proxy" del objeto directamente
-        Pedido pedidoExistente = pedidoRepository.getReferenceById(detallesPedidos.getProducto().getId_producto());   //
+        Pedido pedidoExistente = pedidoRepository.getReferenceById(detallesPedidos.getPedido().getId_pedido());   //
         Producto productoExistente = productoRepository.getReferenceById((long) detallesPedidos.getProducto().getId_producto());
 
         detallesPedidos.setPedido(pedidoExistente);

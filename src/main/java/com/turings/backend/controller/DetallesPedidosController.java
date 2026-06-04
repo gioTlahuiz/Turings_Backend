@@ -77,6 +77,9 @@ public class DetallesPedidosController {
      */
     @PostMapping
     public ResponseEntity<DetallesPedidos> createProduct(@ModelAttribute UploadDetalleRequest parametro) {
+        System.out.println(parametro.getPedido().getId_pedido());
+        System.out.println(parametro.getProducto().getId_producto());
+
         Producto actual = productoRepository.findById(parametro.getProducto().getId_producto());
         if(actual.isDiseno()){
             parametro.setImagen( "/api/v1/detalles-pedidos/img/" + storageService.saveDetails(parametro.getImagenFile()));
@@ -92,6 +95,9 @@ public class DetallesPedidosController {
         creado.setPrecio_total(parametro.getPrecio_total());
         creado.setRastreador(parametro.getRastreador());
         creado.setProducto(parametro.getProducto());
+
+        System.out.println(parametro.getPedido().getId_pedido());
+        System.out.println(parametro.getProducto().getId_producto());
 
         DetallesPedidos detallesPedidosDB = detallesPedidosService.saveDetails(creado);
         return ResponseEntity.status(HttpStatus.CREATED).body(detallesPedidosDB);
