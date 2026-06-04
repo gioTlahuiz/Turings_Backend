@@ -1,10 +1,23 @@
 package com.turings.backend.controller;
 
+import com.turings.backend.DTO.UploadDetalleRequest;
+import com.turings.backend.DTO.UploadProductoRequest;
 import com.turings.backend.model.DetallesPedidos;
+import com.turings.backend.model.Producto;
+import com.turings.backend.model.Usuario;
+import com.turings.backend.repository.ProductoRepository;
+import com.turings.backend.repository.UsuarioRepository;
 import com.turings.backend.service.DetallesPedidosService;
+import com.turings.backend.service.FileStorageService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,10 +32,17 @@ import java.util.Optional;
 @CrossOrigin(origins = "*") //Permite resolver los conflictos de los CORS
 public class DetallesPedidosController {
 
+
+    private FileStorageService storageService;
+    @Autowired
+    private UsuarioRepository usuarioRepository;
+    @Autowired
+    private ProductoRepository productoRepository;
     final private DetallesPedidosService detallesPedidosService;
 
-    public DetallesPedidosController(DetallesPedidosService detallesPedidosService) {
+    public DetallesPedidosController(DetallesPedidosService detallesPedidosService, FileStorageService fileStorageService) {
         this.detallesPedidosService = detallesPedidosService;
+        this.storageService = fileStorageService;
     }
 
     /***
@@ -30,7 +50,7 @@ public class DetallesPedidosController {
      * ResponseEntity -> Es el JSON
      * @return una lista (arreglo) con los objetos productos en estructura JSON
      */
-    @GetMapping()
+    @GetMapping
     public ResponseEntity<List<DetallesPedidos>> list() {
         return ResponseEntity.ok(detallesPedidosService.findAll());
     }
@@ -55,9 +75,25 @@ public class DetallesPedidosController {
      * @param detallesPedidos Nuevo detalle de producto a crear
      * @return Regresa un mensaje 200, ya que el detalle del producto se creó en la tabla
      */
-    @PostMapping("/")
-    public ResponseEntity<DetallesPedidos> createProduct(@RequestBody DetallesPedidos detallesPedidos) {
-        DetallesPedidos detallesPedidosDB = detallesPedidosService.saveDetails(detallesPedidos);
+    @PostMapping
+    public ResponseEntity<DetallesPedidos> createProduct(@ModelAttribute UploadDetalleRequest parametro) {
+        Producto actual = productoRepository.findById(parametro.getProducto().getId_producto());
+        if(actual.isDiseno()){
+            parametro.setImagen( "/api/v1/detalles-pedidos/img/" + storageService.saveDetails(parametro.getImagenFile()));
+        }else{
+            parametro.setImagen(null);
+        }
+
+        DetallesPedidos creado = new DetallesPedidos();
+        creado.setCantidad_producto(parametro.getCantidad_producto());
+        creado.setEstado_pedido(parametro.getEstado_pedido());
+        creado.setImagen(parametro.getImagen());
+        creado.setPedido(parametro.getPedido());
+        creado.setPrecio_total(parametro.getPrecio_total());
+        creado.setRastreador(parametro.getRastreador());
+        creado.setProducto(parametro.getProducto());
+
+        DetallesPedidos detallesPedidosDB = detallesPedidosService.saveDetails(creado);
         return ResponseEntity.status(HttpStatus.CREATED).body(detallesPedidosDB);
     }
 
@@ -102,6 +138,28 @@ public class DetallesPedidosController {
             return ResponseEntity.status(HttpStatus.OK).body(detallesPedidosDelete);
         }
         return ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("/historial")
+    public List<DetallesPedidos> getHistorial(@AuthenticationPrincipal UserDetails userDetails){
+
+        Usuario usuario = usuarioRepository.findByCorreoElectronico(userDetails.getUsername())
+                .orElseThrow();
+        return detallesPedidosService.getHistorial((long) usuario.getId_usuario());
+
+    }
+
+    @GetMapping("/last")
+    public List<Producto> getLast(){
+        return detallesPedidosService.getLastPedidos();
+    }
+
+
+    @GetMapping("/img/{filename:.+}")
+    public ResponseEntity<Resource> getFile(@PathVariable String filename) {
+        Resource file = storageService.getDetailsImg(filename);
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"").body(file);
     }
 
 }

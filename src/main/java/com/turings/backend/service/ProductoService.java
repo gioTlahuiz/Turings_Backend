@@ -7,16 +7,25 @@ import com.turings.backend.model.Producto;
 import com.turings.backend.repository.CategoriaRepository;
 import com.turings.backend.repository.DetallesPedidosRepository;
 import com.turings.backend.repository.ProductoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class ProductoService {
 
+    private final Path root = Paths.get("Pictures");
     private final ProductoRepository productoRepository;
     private final CategoriaRepository categoriaRepository;
     private final DetallesPedidosRepository detallesPedidosRepository;
@@ -42,7 +51,6 @@ public class ProductoService {
     public List<Producto> getAllProductos(){
         return productoRepository.findAll();
     }
-
 
 
     public Producto saveProducto(Producto producto){
@@ -76,13 +84,6 @@ public class ProductoService {
     public Optional<Producto> findById(Long id) {
         return productoRepository.findById(id);
     }
-
-//    private void assignRelations(Producto producto) {
-//        if (producto.getCategoria() != null && producto.getCategoria().getId_categoria() != null){
-//            Categoria categoria = categoriaRepository.findById(producto.getCategoria().getId_categoria()).orElse(null);
-//            producto.setCategoria(categoria);
-//        }
-//    }
 
 
 }

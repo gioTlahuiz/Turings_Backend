@@ -3,6 +3,8 @@ package com.turings.backend.service;
 import com.turings.backend.model.Usuario;
 import com.turings.backend.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -49,5 +51,10 @@ public class UsuarioService {
 
     public void borrarUsuario (Long id){
         usuarioRepository.deleteById(id);
+    }
+
+    public Usuario login(String correo){
+        Usuario user = usuarioRepository.findByCorreoElectronico(correo).get();
+        return user;
     }
 }

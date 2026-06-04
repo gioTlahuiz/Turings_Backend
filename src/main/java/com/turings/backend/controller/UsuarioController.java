@@ -1,11 +1,16 @@
 package com.turings.backend.controller;
 
+import com.turings.backend.DTO.LoginRequest;
 import com.turings.backend.model.Usuario;
 import com.turings.backend.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
+
 
 import java.util.List;
 
@@ -31,6 +36,7 @@ public class UsuarioController {
     public Usuario getUsuario(@PathVariable("id")Long id){
         return usuarioService.getUsuarioById(id);
     }
+
 
     @PostMapping
     public Usuario guardarUsuario (@RequestBody Usuario usuario){

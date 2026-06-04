@@ -9,7 +9,8 @@ import java.util.Date;
 public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id_reviews;
+    @Column(name = "id_reviews")
+    private int idReviews;
 
     private double calificacion;
 
@@ -25,18 +26,18 @@ public class Review {
     }
 
     public Review(int id_reviews, double calificacion, String comentario, Date fecha_review) {
-        this.id_reviews = id_reviews;
+        this.idReviews = id_reviews;
         this.calificacion = calificacion;
         this.comentario = comentario;
         this.fecha_review = fecha_review;
     }
 
     public int getId_reviews() {
-        return id_reviews;
+        return idReviews;
     }
 
     public void setId_reviews(int id_reviews) {
-        this.id_reviews = id_reviews;
+        this.idReviews = id_reviews;
     }
 
     public double getCalificacion() {
