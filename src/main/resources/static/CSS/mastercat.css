@@ -1,0 +1,147 @@
+/* Paleta de colores */
+:root {
+  --color-blanco: #FFFFFF;
+  --color-azul-pastel: #7AB8FF;
+  --color-azul-profundo: #1A2A40;
+  --color-morado: #8A3D9E;
+  --color-rosa-dorado: #E6A8A1;
+}
+
+/* MAITTE */
+
+@font-face {
+    font-family: 'DM Sans';
+    src: url('../FONT/DM_Sans/DMSans-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'DM Sans';
+    src: url('../FONT/DM_Sans/DMSans-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+/* GIO */
+.card-add {
+    border: 2px solid var(--color-azul-pastel);
+    border-radius: 15px;
+    background-color: var(--color-blanco);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Contenedor del icono */
+.icon-container {
+    border: 3px solid var(--color-morado);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+/* Icono */
+.icon-container i {
+    font-size: 80px;
+    color: var(--color-azul-profundo);
+}
+
+/* Texto */
+.btn-add {
+    background-color: var(--color-rosa-dorado) !important;
+    color: var(--color-azul-profundo) !important;
+}
+
+/* Hover */
+.card-add:hover {
+    transform: translateY(-5px);
+    border-color: var(--color-morado);
+}
+
+.card-add:hover .icon-container {
+    background-color: var(--color-morado);
+}
+
+.card-add:hover .icon-container i {
+    color: var(--color-blanco);
+}
+
+/* estilo de los botones */
+.card-actions .btn-edit {
+    background-color: var(--color-azul-pastel);
+    color: var(--color-azul-profundo);
+    border: none;
+    border-radius: 10px;
+    padding: 10px 16px;
+}
+
+.card-actions .btn-delete {
+    background-color: var(--color-morado);
+    color: var(--color-blanco);
+    border: none;
+    border-radius: 10px;
+    padding: 10px 16px;
+}
+
+.btn-edit {
+    background-color: var(--color-azul-pastel) !important;
+    color: var(--color-azul-profundo) !important;
+}
+
+.btn-delete {
+    background-color: var(--color-morado) !important;
+    color: var(--color-blanco) !important;
+}
+
+/* Hover */
+.btn-edit:hover {
+    background-color: var(--color-rosa-dorado);
+    color: var(--color-blanco);
+}
+
+.btn-delete:hover {
+    background-color: var(--color-azul-profundo);
+    color: var(--color-blanco);
+}
+
+/* OSWALDO */
+/* Oculto por defecto y con fondo oscuro transparente */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-contenido {
+  font-family: "Montserrat";
+  color: var(--color-azul-profundo);
+  background-color: var(--color-rosa-dorado);
+  margin: 15% auto;
+  padding: 20px;
+  border-radius: 10px;
+  width: 350px;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.btn-eliminar-artc {
+  box-sizing: border-box;
+  padding: 0 0 14px 0;
+}
+
+.btn-si-no {
+  width: 100%;
+  height: 10%;
+  border-color: var(--color-blanco);
+  border-radius: 5px;
+}
+
+
+

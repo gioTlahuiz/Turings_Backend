@@ -71,6 +71,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET,"/api/v1/reviews").permitAll()
                         .requestMatchers(HttpMethod.GET,"/api/v1/detalles-pedidos").permitAll()
                         .requestMatchers(HttpMethod.GET,"/api/v1/detalles-pedidos/last").permitAll()
+                        .requestMatchers(HttpMethod.GET,"/api/v1/detalles-pedidos/img/*").permitAll()
 
                         /*ADMIN HTML */
 

@@ -1,0 +1,536 @@
+/* Paleta de colores */
+:root {
+  --color-blanco: #FFFFFF;
+  --color-azul-pastel: #7AB8FF;
+  --color-azul-profundo: #1A2A40;
+  --color-morado: #8A3D9E;
+  --color-rosa-dorado: #E6A8A1;
+}
+
+/* Fernando */
+.banner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  color: var(--color-blanco);
+  font-family: Arial, sans-serif;
+
+  /* Imagen de fondo */
+  background-image:
+    linear-gradient(to right, rgba(26, 42, 64, 0.6), rgba(138, 61, 158, 0.6)),
+    url("../Pictures/fondoTinta.jpeg");
+  background-size: cover;
+  background-position: center;
+}
+
+/* Capa transparente encima de la imagen */
+.banner::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.2); /* negro semitransparente */
+  z-index: 1;
+}
+
+.texto {
+  flex: 1; /* ocupa el espacio restante */
+  text-align: right; /* alinea el texto hacia la derecha */
+  position: relative;
+  z-index: 2;
+}
+
+.logo img {
+  width: 150px;
+  border-radius: 50%;
+  margin-right: 30px;
+}
+
+/* Oswaldo */
+/* Estilo y tamaño de letra sección 3 */
+.sec-3-t {
+  font-family: "Montserrat";
+  font-size: 2.4rem;
+  padding-left: 100px;
+  color: var(--color-morado);
+}
+
+.sec-3-sb {
+  font-family: "Montserrat";
+  font-size: 1.8rem;
+  color: var(--color-azul-profundo);
+}
+
+.sec-3-ct {
+  font-family: "DM Sans";
+  font-size: 1.2rem;
+  color: var(--color-azul-profundo);
+}
+
+/* Formato para los iconos de la sección por qué elegirnos */
+.img-svg {
+  width: 25%;
+  height: 25%;
+}
+
+/* Formato y diseño para el botón para explorar descuentos */
+.color-desc {
+  border-color: var(--color-rosa-dorado);
+  background-color: var(--color-rosa-dorado);
+  color: var(--color-blanco);
+  font-family: "DM Sans";
+  font-size: 1rem;
+  margin-top: 10px;
+}
+
+.color-desc:hover {
+  background-color: var(--color-morado);
+  border-color: var(--color-morado);
+  transform: scale(1.05); /* efecto ligero */
+  transition: all 0.2s ease;
+}
+
+/* Giovani */
+
+/* #carousel {
+  position: relative;
+  height: 400px;
+  top: 50%;
+  transform: translateY(-50%);
+  overflow: hidden;
+}
+
+#carousel div {
+  position: absolute;
+  transition: transform 1s, left 1s, opacity 1s, z-index 0s;
+  opacity: 1;
+}
+
+#carousel div img {
+    max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  transition: all 1s;
+}
+
+#carousel div.hideLeft {
+  left: 0%;
+  opacity: 0;
+  transform: translateY(50%) translateX(-50%);
+}
+
+#carousel div.hideLeft img {
+  width: 200px;
+}
+
+#carousel div.hideRight {
+  left: 100%;
+  opacity: 0;
+  transform: translateY(50%) translateX(-50%);
+}
+
+#carousel div.hideRight img {
+  width: 200px;
+}
+
+#carousel div.prev {
+  z-index: 5;
+  left: 30%;
+  transform: translateY(50px) translateX(-50%);
+}
+
+#carousel div.prev img {
+  width: 300px;
+}
+
+#carousel div.prevLeftSecond {
+  z-index: 4;
+  left: 15%;
+  transform: translateY(50%) translateX(-50%);
+  opacity: 0.7;
+}
+
+#carousel div.prevLeftSecond img {
+  width: 200px;
+}
+
+#carousel div.selected {
+  z-index: 10;
+  left: 50%;
+  transform: translateY(0px) translateX(-50%);
+}
+
+#carousel div.next {
+  z-index: 5;
+  left: 70%;
+  transform: translateY(50px) translateX(-50%);
+}
+
+#carousel div.next img {
+  width: 300px;
+}
+
+#carousel div.nextRightSecond {
+  z-index: 4;
+  left: 85%;
+  transform: translateY(50%) translateX(-50%);
+  opacity: 0.7;
+}
+
+#carousel div.nextRightSecond img {
+  width: 200px;
+}
+
+.buttons {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 10px;
+} */
+
+.carousel-section {
+  text-align: center;
+  padding: 40px;
+  background: var(--color-blanco);
+}
+
+.swiper {
+  width: 100%;
+  max-width: 900px;
+  padding: 40px 0;
+}
+
+.swiper-slide {
+  width: 250px;
+  height: 300px;
+  background: var(--color-azul-pastel);
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    transform 0.3s,
+    opacity 0.3s;
+  opacity: 0.5;
+}
+
+/* Imagen adaptable */
+.swiper-slide img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+/* Slide activo (centro) */
+.swiper-slide-active {
+  transform: scale(1.15);
+  opacity: 1;
+  filter: blur(0);
+}
+
+/* Slides laterales */
+.swiper-slide-prev,
+.swiper-slide-next {
+  transform: scale(0.9);
+  opacity: 0.8;
+}
+
+.swiper-slide {
+  width: 260px;
+  height: 340px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Tarjeta */
+.card {
+  width: 100%;
+  height: 100%;
+  background: var(--color-azul-pastel);
+  border-radius: 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition:
+    transform 0.3s,
+    opacity 0.3s;
+}
+
+/* Imagen */
+.card img {
+  max-width: 100%;
+  max-height: 180px;
+  object-fit: contain;
+}
+
+/* Texto */
+.info {
+  text-align: center;
+}
+
+.info h3 {
+  font-size: 16px;
+  margin: 10px 0 5px;
+  font-family: "Montserrar-T";
+  color: var(--color-morado);
+}
+
+.info p {
+  font-size: 13px;
+  color: var(--color-azul-profundo);
+}
+
+/* Efecto activo */
+.swiper-slide-active .card {
+  transform: scale(1.1);
+}
+
+/* Alex */
+
+/* Alex */
+
+.custom-review-card {
+  background-color: var(--color-blanco);
+  border-radius: 8px;
+  display: flex;
+  width: 100%;
+  padding: 1rem;
+
+  flex-direction: column;
+  margin: 0.5rem;
+  -webkit-box-shadow: 0px 0px 5px 3px #BABABA; 
+  box-shadow: 0px 0px 5px 3px #BABABA;
+}
+
+.review-stars {
+  color: var(--color-morado);
+  font-size: 0.8rem;
+  display: flex;
+  flex-direction: row;
+}
+
+.review-body {
+  font-size: 0.85rem;
+  text-align: left;
+  color: var(--color-azul-profundo);
+}
+
+.reviewer-name {
+  font-size: 0.8rem;
+  text-align: left;
+  font-weight: 600;
+  color: var(--color-azul-profundo);
+}
+
+.review-date {
+  font-size: 0.7rem;
+  color: var(--color-azul-pastel);
+}
+
+.carousel-item {
+  transition: transform 1.2s ease-in-out;
+}
+
+
+.grid-resenas-steam{
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+
+
+/* Tarjeta */
+.card {
+  width: 100%;
+  height: 100%;
+  background: #cfe3f1;
+  border-radius: 15px;
+  padding: 15px;
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  transition:
+    transform 0.3s,
+    opacity 0.3s;
+}
+
+/* Imagen */
+.card img {
+  max-width: 100%;
+  max-height: 180px;
+  object-fit: contain;
+}
+
+/* Texto */
+.info {
+  text-align: center;
+}
+
+.info h3 {
+  font-size: 16px;
+  margin: 10px 0 5px;
+  font-family: "Montserrar-T";
+}
+
+.info p {
+  font-size: 13px;
+  color: #555;
+}
+
+/* Efecto activo */
+.swiper-slide-active .card {
+  transform: scale(1.1);
+}
+
+.btn-filtro-steam {
+    background-color: #ffffff;
+    color: #2D1442;
+    border: 1px solid #6A329F;
+    border-radius: 20px;
+    padding: 6px 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.btn-filtro-steam.activo, .btn-filtro-steam:hover {
+    background-color: #6A329F;
+    color: #ffffff;
+}
+
+.tarjeta-invitacion-blanca {
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 24px;
+    padding: 40px;
+    text-align: center;
+    max-width: 750px;
+    margin: 0 auto;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.tarjeta-invitacion-blanca h4 {
+    color: #1A1A1A;
+    font-size: 1.4rem;
+}
+
+.btn-tinta-nomada-degradado {
+    background: linear-gradient(90deg, #EAA688, #C38CB5);
+    color: white;
+    font-weight: 700;
+    font-size: 1.2rem;
+    padding: 12px 64px;
+    border: none;
+    border-radius: 30px;
+    box-shadow: 0 4px 15px rgba(234, 166, 136, 0.3);
+    transition: transform 0.2s ease;
+}
+
+.btn-tinta-nomada-degradado:hover {
+    transform: scale(1.02);
+}
+
+.modal-overlay-steam {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.modal-content-steam {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    position: relative;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.selector-estrellas-modal i {
+    font-size: 1.5rem;
+    color: #ccc;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.input-custom-steam {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    width: 100%;
+}
+
+.btn-publicar-degradado-steam {
+    background: linear-gradient(90deg, #EAA688, #C38CB5);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-weight: bold;
+    width: 100%;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: opacity 0.3s;
+}
+
+.btn-publicar-degradado-steam:hover {
+    opacity: 0.9;
+}
+
+.btn-regresar-modal-steam {
+    background-color: transparent;
+    color: #2D1442;
+    border: 1px solid #2D1442;
+    padding: 12px 20px;
+    border-radius: 8px;
+    width: 100%;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-regresar-modal-steam:hover {
+    background-color: #2D1442;
+    color: white;
+}
+
+.badge-verificado-steam {
+    display: inline-block;
+    background-color: #e2f0d9;
+    color: #385723;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.85rem;
+}
+
+.text-white.fw-bold.mb-1 {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7), -1px -1px 0px rgba(0, 0, 0, 0.8);
+}
+
+.text-white-50.small {
+    color: #ffffff !important;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+    font-weight: 500;
+}

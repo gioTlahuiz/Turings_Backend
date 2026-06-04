@@ -1,0 +1,176 @@
+ /* Paleta de colores*/
+ :root {
+  --color-blanco: #FFFFFF;
+  --color-azul-pastel: #7AB8FF;
+  --color-azul-profundo: #1A2A40;
+  --color-morado: #8A3D9E;
+  --color-rosa-dorado: #E6A8A1;
+}
+
+ /* Erick */
+.overlay-container {
+  position: relative;
+  display: inline-block;
+}
+
+.fondo {
+  width: 300px; /* ajusta según tu diseño */
+  padding-top: 2rem;
+}
+
+.overlay {
+  position: absolute;
+  top: 30%;   /* posición vertical */
+  left: 25%;  /* posición horizontal */
+  width: 150px; /* tamaño del diseño */
+  pointer-events: none;
+}
+
+.discount {
+  padding-left: 2rem;
+  text-decoration: line-through;
+}
+
+
+/* Fer */
+.add-to-cart-card {
+  width: auto;
+  border: 1px solid var(--color-azul-pastel);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  background-color: var(--color-blanco);
+  margin: 20px;
+  position: relative;
+  text-align: center;
+}
+
+.badge-cart {
+  position: absolute;
+  top: 35px;              /* prueba con 35px o 40px para bajarlo solo un poquito */
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--color-rosa-dorado);
+  color: var(--color-azul-profundo);
+  padding: 5px 10px;
+  font-size: 0.8em;
+  border-radius: 8%;
+  text-align: center;
+}
+
+
+.add-to-cart-card .card-body {
+  padding: 20px;
+}
+
+.add-to-cart-card .card-title {
+  font-size: 1.2em;
+  margin-top: -5px;   /* valor negativo lo sube ligeramente */
+  margin-bottom: 10px;
+}
+
+.add-to-cart-card .card-price {
+  font-weight: bold;
+  color: var(--color-morado);
+  margin-top: 25px;   /* agrega espacio arriba para bajarlo */
+  margin-bottom: 20px;
+}
+
+
+.add-to-cart-card .card-details {
+  font-size: 0.9em;
+  color: var(--color-azul-profundo);
+  margin-bottom: 20px;
+}
+.justificacion{
+  text-align: justify;
+}
+
+
+/* Ale */
+.contenedor-compra-ale {
+  max-width: 450px;
+  margin: 20px auto;
+}
+
+.caja-subida {
+  background-color: var(--color-azul-pastel);
+  border-radius: 25px;
+  padding: 40px 20px;
+  text-align: center;
+  position: relative;
+  cursor: pointer;
+  margin-bottom: 10px;
+  color: var(--color-azul-profundo);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+.icono-esquina {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 1.5rem;
+  color: var(--color-morado);
+}
+
+.img-preview-ale {
+  max-width: 100px;
+  margin-bottom: 10px;
+  border: 2px solid var(--color-rosa-dorado);
+  border-radius: 8px;
+}
+
+.txt-subir {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 1.8rem;
+  color: var(--color-morado);
+  margin: 0;
+}
+
+.btn-agregar-ale {
+  background-color: var(--color-azul-profundo);
+  color: var(--color-blanco);
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 400;
+  margin-bottom: 20px;
+  transition: background 0.3s ease;
+}
+
+.btn-agregar-ale:hover {
+  background-color: var(--color-morado);
+}
+
+.info-acordeon-ale {
+  border: 1px solid var(--color-rosa-dorado);
+  border-radius: 8px;
+  padding: 15px;
+  background-color: var(--color-blanco);
+}
+
+.header-acordeon {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.header-acordeon h6 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  margin: 0;
+  color: var(--color-azul-profundo);
+}
+
+.info-acordeon-ale p {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.9rem;
+  color: var(--color-azul-profundo);
+  margin-top: 10px;
+  line-height: 1.4;
+}
+
